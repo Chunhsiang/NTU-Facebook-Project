@@ -1,7 +1,6 @@
 import logging
 import json
-import os
-import sys
+import sys,os
 import time
 import argparse
 import csv
@@ -62,9 +61,11 @@ def read_us_user_like_page(input_file_path):
     Raises:
         incorrect_file_type: Contradiction of correct input file structure.
             Example of correct structure:
+            {
                 user_id,like_pages,like_times
                 1000000736695525,21785951839,1
                 1000001070029820,"44473416732,50978409031,630067593722141","2,1,2"
+            }
     """
 
     page_page_dict = {}
@@ -83,8 +84,8 @@ def read_us_user_like_page(input_file_path):
     with open(input_file_path, "r") as inputfile:
         reader = csv.DictReader(inputfile)
 
-        for i, row in enumerate(tqdm(reader, 
-                                     total=get_num_lines(input_file_path))):
+        for i, row in enumerate( tqdm( reader, 
+                                    total = get_num_lines(input_file_path))):
             pageid_list = row['like_pages'].split(',')
 
             for j, p in enumerate(pageid_list):
@@ -95,12 +96,12 @@ def read_us_user_like_page(input_file_path):
                     if k < j:
                         continue
                     elif k == j:
-                        page_page_dict[p][p] = page_page_dict[p].get(p, 0) + 1
+                        page_page_dict[p][p] = page_page_dict[p].get(p,0) + 1
                     else:
                         if p1 not in page_page_dict:
                             page_page_dict[p1] = {}
-                        page_page_dict[p][p1] = page_page_dict[p].get(p1, 0) + 1
-                        page_page_dict[p1][p] = page_page_dict[p1].get(p, 0) + 1
+                        page_page_dict[p][p1] = page_page_dict[p].get(p1,0) + 1
+                        page_page_dict[p1][p] = page_page_dict[p1].get(p,0) + 1
 
     return(page_page_dict)
 
@@ -110,7 +111,7 @@ def read_page_page_matrix(input_path):
 
     """Read file page_page_matrix int of a pandas dataframe.
 
-    Read the input file using pandas.read_csv and assign column "page_id" as
+    Read the input file using Pandas.read_csv and assign column "page_id" as
     the dataframe's index. Then check if the dataframe is a square matrix.
 
     Args:
@@ -122,10 +123,12 @@ def read_page_page_matrix(input_path):
     Raise:
         incorrect_file_type: Contradiction of correct input file structure.
             Example of correct structure:
-                        page_id, 10018702564, 100434040001314, ...
-                    10018702564,       39437,             108, ...
-                100434040001314,         108,            3473, ...
-                            ...,         ...,             ..., ...
+            {
+                page_id,10018702564,100434040001314,100450643330760
+                10018702564,39437,108,74
+                100434040001314,108,3473,4            
+            }
+
     """
 
     matrix_df = pd.read_csv(input_path, sep =',' , index_col="page_id")
@@ -180,7 +183,7 @@ def read_us_user_like_page_pd_df(input_path):
 def read_page_info_data(input_path, page_id_column_index):
     """Reading file "page_info" data to a Pandas dataframe
 
-        Read the file by pandas.read_csv. Then change the column name inputed 
+        Read the file by Pandas.read_csv. Then change the column name inputed 
         into "page_id" to faciliate merging dataframes in later steps.
 
         Args:
@@ -208,7 +211,7 @@ def read_page_info_data(input_path, page_id_column_index):
 def read_page_score_data(input_path):
     """Read file "page_score_data" into a pandas dataframe.
 
-        Read the file by pandas.read_csv. Then check if columns "page_id"
+        Read the file by Pandas.read_csv. Then check if columns "page_id"
         and "PC1_std" which faciliaes later steps.
 
         Args:

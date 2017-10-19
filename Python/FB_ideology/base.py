@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import json
-import os
-import sys
+import sys,os
 import time
 import argparse
 import csv
@@ -38,7 +37,8 @@ def us_user_page_to_page_page_matrix(page_page_dict):
         page_page_df: A square pandas dataframe storing numbers of shared users
             between pages, having ID of pages liked by users as column names 
             and row names, ex:
-                                     pageid1                  pageid2                  pageid3
+            {
+                         pageid1                  pageid2                  pageid3
                 pageid1  number of users          number of users          number of users
                          liked pageid1            liked pageid1 & pageid2  liked pageid1 & pageid3
         
@@ -47,6 +47,7 @@ def us_user_page_to_page_page_matrix(page_page_dict):
 
                 pageid3  number of users          number of users          number of users
                          liked pageid1 & pageid3  liked pageid2 & pageid3  liked pageid
+            }
     """
 
     sorted_dict_keys = sorted(page_page_dict.keys())
@@ -62,12 +63,11 @@ def us_user_page_to_page_page_matrix(page_page_dict):
 
 
 
-def page_page_matrix_to_page_score(page_page_dataframe,
-                                   page_info_data, 
-                                   clinton_on_the_left = False):
-    """Generate page ideology score using Principal Component Analysis (PCA)
+def page_page_matrix_to_page_score(page_page_dataframe, page_info_data, 
+                                    clinton_on_the_left = False ):
+    """Generate page ideology score using Singular Value Decomposition (SVD)
      
-    Conduct PCA on the page page matrix after standardized to get ideology 
+    Conduct SVD on the page page matrix after standardized to get ideology 
     score of different pages. Then we merge the scores with other information
     of the page.
 
@@ -76,11 +76,9 @@ def page_page_matrix_to_page_score(page_page_dataframe,
             is the return of function us_user_page_to_page_page_matrix()
         page_info_data: Information of pages: page name, page ID, page URL, etc.
         clinton_on_the_left: A boolean expression indicating whether the 
-            function ensures Hillary Clinton's computed first principal 
-            compoenent being negative, since PCs are not preserved under 
-            scalar multiplication. When True, it will multiply all first 
-            principal components with negative one if Hillary Clinton has 
-            positive first principal component.
+            function ensures Hillary Clinton's computed ideology score being
+            negative to make ideology score increases as the person being 
+            more conservative.
     
     Returns:
         page_score_dataframe: Pandas dataframe of a page's score with other 
@@ -100,10 +98,10 @@ def page_page_matrix_to_page_score(page_page_dataframe,
     P_PCA = pca.fit_transform(G_std)
     P_PCA_std = StandardScaler().fit_transform(P_PCA)
     SVD_df = pd.DataFrame({"page_id": id_used,
-                           "PC1": P_PCA[:, 0], 
-                           "PC2": P_PCA[:, 1],
-                           "PC1_std": P_PCA_std[:, 0],
-                           "PC2_std": P_PCA_std[:, 1]})
+                         "PC1": P_PCA[:, 0], 
+                         "PC2": P_PCA[:, 1],
+                         "PC1_std": P_PCA_std[:, 0],
+                         "PC2_std": P_PCA_std[:, 1]})
     # Ensure the liberal's have negative ideology score by checking Clinton's.
     if(clinton_on_the_left == True ):
         clinton_index = SVD_df.index[SVD_df["page_id"] 
