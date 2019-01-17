@@ -1,4 +1,4 @@
-### 2016 Presidential Election Fake News Analysis
+# 2016 Presidential Election Fake News Analysis
 
 Slides:
 https://docs.google.com/presentation/d/1V4vxpBDHxyCNS7dTn8kcWQjpkNU-HRqXB1O3rQeflnQ/edit?usp=sharing 
