@@ -4,7 +4,7 @@ Slides:
 https://docs.google.com/presentation/d/1V4vxpBDHxyCNS7dTn8kcWQjpkNU-HRqXB1O3rQeflnQ/edit?usp=sharing 
 
 ## Introduction
-Fake News has been considered a serious problem as it forms false belief and threaten the integrity of a democracy. The problem could be even more damaging on Facebook, which provides not only a platform for spreading fake news, but also an algorithm to people that tend to "like" the article feeded to them. Before trying to answer the spread of fake news and their influences on Facebook, we started with exploring their discussion topics and the words that are brought up together with certain politicians and issues.
+Before trying to answer the spread of fake news and their influences on Facebook, we started with exploring their discussion topics and the words that are brought up together with certain politicians and issues.
 
 ## Data
 * Post data from 1000 popular political Facebook pages having url that links to fake news website. 
