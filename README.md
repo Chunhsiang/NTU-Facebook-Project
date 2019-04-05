@@ -37,7 +37,7 @@ In addition, we also tried to label where these Facebook users are from by the p
 
 By our calculated political ideology score, we can quantify any politician's popularity by months, by weeks, our even after some important event using all public data on Facebook. Polls or election prediction could be done at any time scale we have in mind. We have also worked on a lot of interesting application like fake-news detection, sentiment analysis, segregation (echo-chamber effect) analysis,full research paper: https://kengchichang.com/paper/thesis-fb-paper.pdf.
 
-In order to derive the political ideology score more efficiently, I have written a Python package by organising all code in the whole process. Which started from connecting the database, building page by page matrix, PCA, and ends with computing the user's score by likes they hit on politician's fan pages. For more detail, please refer to: https://github.com/NTUUSFB/workshop-2017-10/blob/master/4-fbscore/fbscore-demo.ipynb 
+In order to derive the political ideology score more efficiently, I have written a Python package by organising all code in the whole process. Which started from connecting the database, building page by page matrix, PCA, and ends with computing the user's score by likes they hit on politician's fan pages. For more detail, please refer to: https://github.com/Chunhsiang/NTU-FB_workshop-2017-10/blob/master/4-fbscore/fbscore-demo.ipynb
 
 
 ## Work I was responsible for in the Facebook project:
