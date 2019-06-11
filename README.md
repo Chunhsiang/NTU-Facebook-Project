@@ -18,7 +18,7 @@ time, our program generates a page by page matrix containing shared users among 
 
 
 
-We apply principle component analysis (PCA) to table2 and assigned the first principle component as political ideology score. 
+We apply principal component analysis (PCA) to table2 and assigned the first principal component as political ideology score. 
 Figure 1 shows the ideology of all US Facebook political users, which seems to be more liberal and lean to the left. 
 
 ![figure1](https://user-images.githubusercontent.com/31845611/44614841-2d602500-a7f2-11e8-8814-b19036407ce5.png)
